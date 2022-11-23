@@ -1,0 +1,393 @@
+/*!
+ * Bootstrap v4.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;500;700&family=Roboto+Condensed:ital,wght@1,400;1,700&display=swap");
+@import "~bootstrap/scss/bootstrap";
+
+$primary-color: rgb(218, 82, 3);
+$secondary-color: rgb(234, 215, 67);
+$background-color: rgb(234, 215, 67);
+$primary-font: "League Spartan", sans-serif;
+$secondary-font: "Roboto Condensed", sans-serif;
+
+// MASONRY GRID
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  width: auto;
+}
+.my-masonry-grid_column {
+  /* gutter size */
+  padding: 0 10px;
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 20px;
+}
+
+// MOBILE STYLE
+@include media-breakpoint-up(md) {
+}
+
+@include media-breakpoint-down(md) {
+  .hero-image-container img {
+    display: none;
+  }
+}
+@include media-breakpoint-down(lg) {
+  .hero-image-container img {
+    display: none;
+  }
+}
+
+// GLOBAL
+body {
+  font-family: $primary-font;
+  font-weight: 300;
+}
+
+section {
+  padding: 50px 0;
+}
+
+.btn {
+  background-color: $primary-color;
+  color: white;
+  &:hover {
+    color: white !important;
+    background-color: black !important;
+  }
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.price {
+  font-weight: 500;
+}
+
+h3,
+h4,
+h5 {
+  font-weight: 700;
+}
+
+li {
+  list-style: none;
+}
+
+.img-scale {
+  object-fit: scale-down;
+  height: 100%;
+  width: 100%;
+}
+
+.img-cover {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.img-contain {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.img-wrapper {
+  height: 100%;
+  margin-bottom: 0;
+  border-radius: 0.9375rem;
+  overflow: hidden;
+}
+
+.product-name {
+  font-size: 60px;
+  font-weight: 700;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.product-brand {
+  font-size: 40px;
+}
+
+.product-title,
+.arrival-title,
+.banner-title {
+  text-align: left;
+  font-size: 1.5 rem;
+}
+
+.product-filter {
+  text-align: right;
+}
+
+.star-container > *,
+.city-container > * {
+  margin: 0 0.2 rem;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.card-body {
+  padding: 10px 20px;
+}
+
+.list-group-item {
+  border: 0;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+// HEADER
+header {
+  width: 100%;
+  position: relative;
+  background-color: $background-color;
+
+  .navbar-toggler-header {
+    background-color: $background-color;
+    color: black;
+    &:focus {
+      box-shadow: 1px 1px rgb(0, 0, 0);
+    }
+  }
+
+  .notification {
+    font-weight: 700;
+    color: red;
+  }
+}
+
+.dropdown-menu {
+  transform: translateX(-60%);
+  background-color: white;
+  padding: 1rem;
+  .profile-container {
+    margin-bottom: 10px;
+    text-align: center;
+    &:hover {
+      background-color: white;
+    }
+    li {
+      margin: 0 5px;
+    }
+    .profile-image {
+      height: 80px;
+      width: 80px;
+      border: 1px solid rgb(193, 193, 193);
+    }
+    .test {
+      width: 100%;
+      height: 100%;
+      background-color: red;
+    }
+    .profile-name {
+      font-weight: 700;
+    }
+  }
+}
+
+.divider {
+  border-top: 1px solid rgb(193, 193, 193);
+}
+
+// HERO
+.brand-icon {
+  font-size: 26px;
+  font-weight: 700;
+  color: $primary-color;
+  text-decoration: none;
+  &:hover {
+    color: red;
+  }
+}
+
+.hero-caption {
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.hero-section {
+  background-color: $background-color;
+}
+
+.hero-image-container {
+  display: flex;
+}
+
+.btn-hero {
+  width: 200px;
+  padding: 10px 0px;
+}
+
+.btn-favorite {
+  background-color: rgba(176, 31, 55, 0.84) !important;
+  &:hover {
+    background-color: rgba(255, 0, 43, 0.859) !important;
+  }
+}
+
+// NEWSLETTER
+.newsletter-container {
+  height: 100%;
+  background-color: $background-color;
+
+  .btn-newsletter {
+    border-radius: 0 4px 4px 0;
+    min-height: 0;
+  }
+  .input-newsletter {
+    border-radius: 4px 0 0 4px;
+  }
+}
+
+// PRODUCT ARRIVAL
+
+// PRODUCT LIST
+.item-label {
+  margin: 0 5px;
+}
+
+.list-container {
+  padding: 10px;
+  border: 1px solid rgb(193, 193, 193);
+  border-radius: 5px;
+}
+
+.list-item {
+  margin: 5px 0px;
+}
+
+.product-container {
+  border-radius: 20px;
+  .img-container {
+    height: 200px;
+  }
+}
+
+//SEARCH
+.search-input {
+  padding: 5px;
+  border-radius: 0.4rem 0px 0px 0.4rem;
+  border: 1px solid rgb(193, 193, 193);
+}
+
+.btn-search {
+  border-radius: 0px 0.4rem 0.4rem 0px;
+}
+
+// FOOTER
+
+footer {
+  border-top: 1px solid $gray-200;
+  padding-top: 50px;
+
+  .brand-tagline {
+    margin-top: 8px;
+    color: $gray-500;
+    font-weight: 300;
+  }
+
+  .list-group-item {
+    padding: 0.3125rem 0;
+    border: 0;
+    a,
+    span {
+      color: $gray-500;
+      font-weight: 300;
+    }
+    a {
+      &:hover {
+        color: $gray-800;
+      }
+      &:focus {
+        color: $gray-800;
+      }
+    }
+
+    .app-container {
+      max-width: 200px;
+    }
+  }
+  .copyrights {
+    margin: 50px 0;
+    font-weight: 300;
+    color: $gray-500;
+  }
+}
+
+// DETAILS PAGE
+.page-detail-container {
+  height: 300px;
+}
+
+.item-title {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: $secondary-font;
+}
+
+// LOGIN AND REGISTER
+.subtitle {
+  font-size: 27px;
+  font-weight: 700;
+}
+
+// CART PAGE
+.receipt-container {
+  .img-container {
+    height: 100px;
+  }
+  .divider {
+    border-top: 3px solid red;
+    padding-top: 5px;
+  }
+}
+
+//INPUT
+.input-group {
+  font-size: 18px;
+  font-weight: 700;
+  .plus {
+    margin-left: 5px;
+  }
+  .minus {
+    margin-right: 5px;
+  }
+}
+
+// FILTER
+.filter {
+  .btn-toggle {
+    background-color: transparent;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+  }
+
+  .btn:hover {
+    color: black !important;
+    background-color: transparent !important;
+  }
+}
