@@ -8,7 +8,7 @@ import PageDetailDescription from "../components/PageDetail/PageDetailDescriptio
 import PageDetailImage from "../components/PageDetail/PageDetailImage";
 
 import { fetchData } from "../services/action/page";
-import { buyProduct } from "../services/action/product";
+import { addToCart } from "../services/action/product";
 import Footer from "../templates/Footer";
 import Header from "../templates/Header";
 
@@ -26,16 +26,17 @@ export default function DetailsPage() {
     setLoading(false);
   }, [id, dispatch]);
 
-  const productReceipt = async (productData) => {
+  const takeToCart = async (productData) => {
     if (!page?.user) navigate(`/login`);
     const { payload } = await dispatch(
-      buyProduct({ page: `detail-page/${id}`, productData })
+      addToCart({ page: `detail-page/${id}`, productData })
     );
     if (payload.message) setErrMessage(payload.message);
+    loadPageData();
   };
 
   useEffect(() => {
-    loadPageData();
+    if (page == null) loadPageData();
   }, [loadPageData]);
 
   return (
@@ -49,7 +50,7 @@ export default function DetailsPage() {
             </div>
             <div className="col-lg-5 col-sm-12 p-lg-3">
               <PageDetailDescription
-                productReceipt={productReceipt}
+                takeToCart={takeToCart}
                 data={page?.product}
                 loading={loading}
                 errMessage={errMessage}

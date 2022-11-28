@@ -1,6 +1,6 @@
-export const MoneyFormater = (angka, prefix) => {
-  if (typeof angka === String) angka = parseInt(angka);
-  const moneyFormat = new Intl.NumberFormat(["ban", "id"]).format(angka);
+export const MoneyFormater = (value, prefix) => {
+  if (typeof value === String) value = parseInt(value);
+  const moneyFormat = new Intl.NumberFormat(["ban", "id"]).format(value);
   return prefix === undefined
     ? moneyFormat
     : moneyFormat

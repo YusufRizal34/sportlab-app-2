@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 import { fetchData } from "../services/action/page";
+import { buyProduct, deleteProduct } from "../services/action/product";
 
 import Header from "../templates/Header";
 import Footer from "../templates/Footer";
-// import ProductArrive from "../components/Cart/ProductArrive";
 import CartContainer from "../components/Cart/CartContainer";
-import CartFilter from "../components/Cart/CartFilter";
-import ProductPayment from "../components/Cart/ProductPayment";
 
 export default function CartPage() {
   const [page, setPage] = useState(null);
@@ -25,6 +24,16 @@ export default function CartPage() {
     }
   }, [dispatch, navigate]);
 
+  const buyItem = async (data) => {
+    await dispatch(buyProduct({ page: `order-page`, productData: data }));
+    loadPageData();
+  };
+
+  const deleteItem = async (id) => {
+    await dispatch(deleteProduct(`cart-page/${id}`));
+    loadPageData();
+  };
+
   useEffect(() => {
     loadPageData();
   }, [loadPageData]);
@@ -32,9 +41,12 @@ export default function CartPage() {
   return (
     <>
       <Header data={page} />
-      <CartFilter />
-      <ProductPayment />
-      <CartContainer data={page?.products} loading={loading} />
+      <CartContainer
+        data={page}
+        loading={loading}
+        deleteItem={deleteItem}
+        buyItem={buyItem}
+      />
       <Footer data={page?.user} />
     </>
   );

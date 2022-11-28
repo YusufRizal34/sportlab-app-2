@@ -101,7 +101,13 @@ export default function Header({ data = null }) {
                         to="/cart-page"
                       >
                         <div>Cart</div>
-                        <div className="notification">{data?.cart}</div>
+                        {data?.cart > 0 && (
+                          <div className="notification">
+                            <span className="badge rounded-circle text-bg-danger">
+                              {data?.cart}
+                            </span>
+                          </div>
+                        )}
                       </Link>
                     </li>
                     <li>

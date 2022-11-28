@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner";
 import { MoneyFormater } from "../../utils/MoneyFormater";
-import InputNumber from "../InputNumber";
+import InputNumber from "../Form/InputNumber";
 
 export default function PageDetailDescription({
   data,
-  productReceipt,
+  takeToCart,
   loading,
   errMessage,
 }) {
-  const [qty, setQty] = useState(1);
+  const [qty, setqty] = useState(1);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const productData = {
       productId: data?.id,
+      qty,
     };
-    await productReceipt(productData);
+    await takeToCart(productData);
   };
   const handleFavorite = () => {};
 
@@ -33,7 +35,7 @@ export default function PageDetailDescription({
             <div className="item-label">{data.star}</div> |
             <div className="item-label">{data.sold} Terjual</div>
           </div>
-          <InputNumber min={1} name="qty" />
+          <InputNumber min={1} onChange={setqty} currentValue={qty} />
           <div className="d-flex">
             <button
               className="flex-grow-1 me-2 btn btn-hero"

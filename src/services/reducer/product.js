@@ -1,22 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { buyProduct } from "../action/product";
+import { addToCart, deleteProduct, buyProduct } from "../action/product";
 
 const initialState = {
   data: [],
 };
 
 const productSlice = createSlice({
-  name: "page",
+  name: "product",
   initialState,
   extraReducers: {
-    [buyProduct.pending]: (state, action) => {
+    [addToCart.pending]: (state, action) => {
       state.data = null;
     },
-    [buyProduct.fulfilled]: (state, action) => {
+    [addToCart.fulfilled]: (state, action) => {
       state.data = action.payload;
     },
-    [buyProduct.rejected]: (state) => {
+    [addToCart.rejected]: (state) => {
       state.data = null;
+    },
+    [buyProduct.fulfilled]: () => {},
+    [buyProduct.rejected]: (state, payload) => {
+      state.data = payload;
+    },
+    [deleteProduct.fulfilled]: () => {},
+    [deleteProduct.rejected]: (state, payload) => {
+      state.data = payload;
     },
   },
 });

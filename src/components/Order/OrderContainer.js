@@ -20,7 +20,7 @@ export default function OrderContainer({ data = [], loading }) {
                       <div className="row">
                         <div className="col">Arrive</div>
                         <div className="col text-end fw-bold">
-                          {order.paymentStatus}{" "}
+                          Lunas
                           <i className="bi bi-check-lg"></i>
                         </div>
                       </div>
@@ -29,9 +29,9 @@ export default function OrderContainer({ data = [], loading }) {
                       <div className="row">
                         <div className="col-2">
                           <figure>
-                            {order?.order?.imageUrl && (
+                            {order?.product?.imageUrl && (
                               <img
-                                src={`/${order?.order?.imageUrl}`}
+                                src={`/${order?.product?.imageUrl}`}
                                 alt=""
                                 className="img-contain"
                               />
@@ -39,7 +39,8 @@ export default function OrderContainer({ data = [], loading }) {
                           </figure>
                         </div>
                         <div className="col-auto">
-                          <p>Nama Barang : {order?.order?.name}</p>
+                          <p>Nama Barang : {order?.product?.name}</p>
+                          <p>Brand : {order?.product?.brand}</p>
                           <p>Jumlah Barang : {order?.qty} pcs</p>
                           <p>
                             Total Biaya : {MoneyFormater(order.total, "Rp. ")}

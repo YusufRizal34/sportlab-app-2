@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import propTypes from "prop-types";
 
 export default function InputNumber({
-  isValueExported,
-  initialValue,
+  currentValue,
   placeholder,
-  name,
   min,
+  onChange,
 }) {
-  const [value, setValue] = useState(1);
-
   const setChange = (e) => {
-    let newValue = value + e;
-    setValue(newValue);
+    let newQty = currentValue + e;
+    onChange(newQty);
   };
 
   const minus = () => {
-    if (value > min) setChange(-1);
+    if (currentValue > min) setChange(-1);
   };
 
   const plus = () => {
-    if (value >= min) setChange(1);
+    if (currentValue >= min) setChange(1);
   };
-
-  if (initialValue) setValue(1);
 
   return (
     <div className="mb-3">
@@ -36,10 +31,9 @@ export default function InputNumber({
         <input
           readOnly
           min={min}
-          name={name}
           className="form-control"
           placeholder={placeholder ? placeholder : "1"}
-          value={value}
+          value={currentValue}
           onChange={setChange}
         />
         <div className="input-group-prepend">
@@ -57,8 +51,8 @@ InputNumber.defaultProps = {
 };
 
 InputNumber.propTypes = {
-  isValueExported: propTypes.bool,
-  value: propTypes.number,
+  item: propTypes.object,
+  currentValue: propTypes.number,
   onChange: propTypes.func,
   placeholder: propTypes.string,
 };

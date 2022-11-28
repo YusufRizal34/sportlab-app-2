@@ -6,13 +6,18 @@ export default function Filter({
   isSelect,
   title = "Title",
   name,
-  data,
+  data = [],
   onChange,
 }) {
   const [show, setShow] = useState(false);
 
-  const setChange = (e) => {
-    onChange(e.target.value);
+  const handleChanges = (e) => {
+    const { checked, value } = e.target;
+    if (checked) {
+      onChange((prevData) => [...prevData, value]);
+    } else {
+      onChange((prevData) => prevData.filter((e) => e !== value));
+    }
   };
 
   const handleToggle = () => {
@@ -50,18 +55,19 @@ export default function Filter({
         </label>
         {show && (
           <ul>
-            {data.map((item, index) => (
-              <li className="list-item" key={index}>
-                <input
-                  type="checkbox"
-                  name={item.title}
-                  id="item"
-                  value={item.value}
-                  onClick={setChange}
-                />
-                {item.title}
-              </li>
-            ))}
+            {data.length > 0 &&
+              data.map((item, index) => (
+                <li className="list-item" key={index}>
+                  <input
+                    type="checkbox"
+                    name={item.title}
+                    id="item"
+                    value={item.id}
+                    onChange={handleChanges}
+                  />
+                  {item.title}
+                </li>
+              ))}
           </ul>
         )}
       </div>
@@ -70,7 +76,6 @@ export default function Filter({
 }
 
 Filter.propTypes = {
-  onChage: propTypes.func,
   isCheckBox: propTypes.bool,
   isSelect: propTypes.bool,
   title: propTypes.string,
