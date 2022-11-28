@@ -30,22 +30,75 @@ export default function ShopPage() {
     });
   };
 
-  const checkBoxFilteredProducts = (products) => {
+  const checkBoxFilteredProducts = (products, filters, property) => {
     return products.filter(
-      (product) => product.categoryId.indexOf(filter) != -1
+      (product) => product[property].indexOf(filters) != -1
     );
   };
 
   const processingFilter = useMemo(() => {
     let newData = page?.products || [];
-    newData = searchFilteredProducts(newData);
-    newData = checkBoxFilteredProducts(newData);
+
+    //SEARCHING
+    if (query.length > 0) newData = searchFilteredProducts(newData);
+
+    if (filter.length > 0) {
+      //CATEGORY FILTER
+      const categoryFilter = filter
+        .filter((item) => item.name == "category")
+        .map((item) => item.value);
+      newData = checkBoxFilteredProducts(newData, categoryFilter, "categoryId");
+
+      //BRAND FILTER
+      const brandFilter = filter
+        .filter((item) => item.name == "brand")
+        .map((item) => item.value);
+      newData = checkBoxFilteredProducts(newData, brandFilter, "brand");
+    }
+
     return newData;
   }, [query, filter, page]);
 
   useEffect(() => {
     loadPageData();
   }, []);
+
+  const filterData = {
+    category: [
+      {
+        value: 1,
+        title: "Sepatu",
+        name: "category",
+      },
+      {
+        value: 3,
+        title: "Tas",
+        name: "category",
+      },
+      {
+        value: 4,
+        title: "Baju",
+        name: "category",
+      },
+      {
+        value: 5,
+        title: "Jersey",
+        name: "category",
+      },
+    ],
+    brand: [
+      {
+        value: "Adidas",
+        title: "Adidas",
+        name: "brand",
+      },
+      {
+        value: "Eager",
+        title: "Eager",
+        name: "brand",
+      },
+    ],
+  };
 
   return (
     <>
@@ -54,7 +107,7 @@ export default function ShopPage() {
       <ShopContainer
         data={processingFilter}
         loading={loading}
-        filterData={page?.category !== null ? page?.category : ""}
+        filterData={filterData !== null ? filterData : ""}
         setQuery={setQuery}
         setFilter={setFilter}
       />

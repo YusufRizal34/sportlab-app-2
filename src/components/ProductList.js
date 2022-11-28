@@ -25,6 +25,7 @@ export default function ProductList({ isRow = 3, data = [], loading }) {
                     />
                   </div>
                   <div className="card-body">
+                    <div>{item.categoryId}</div>
                     <h4>{item.name}</h4>
                     <div className="price">
                       {MoneyFormater(item.price, "Rp. ")}

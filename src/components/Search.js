@@ -10,7 +10,7 @@ export default function Search({ setQuery }) {
   };
 
   return (
-    <div className="m-3 row">
+    <div className="row pb-2 px-2">
       <input
         className="search-input col-lg-9 col-10"
         type="text"

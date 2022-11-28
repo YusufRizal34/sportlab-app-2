@@ -26,7 +26,7 @@ export default function OrderPage() {
     <>
       <Header data={page} />
       <OrderFilter />
-      <OrderContainer data={page?.order} />
+      <OrderContainer data={page?.order} loading={loading} />
       <Footer data={page?.user} />
     </>
   );

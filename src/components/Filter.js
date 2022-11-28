@@ -12,11 +12,11 @@ export default function Filter({
   const [show, setShow] = useState(false);
 
   const handleChanges = (e) => {
-    const { checked, value } = e.target;
+    const { checked, value, name } = e.target;
     if (checked) {
-      onChange((prevData) => [...prevData, value]);
+      onChange((prevData) => [...prevData, { value, name }]);
     } else {
-      onChange((prevData) => prevData.filter((e) => e !== value));
+      onChange((prevData) => prevData.filter((e) => e.value !== value));
     }
   };
 
@@ -60,9 +60,9 @@ export default function Filter({
                 <li className="list-item" key={index}>
                   <input
                     type="checkbox"
-                    name={item.title}
+                    name={item.name}
                     id="item"
-                    value={item.id}
+                    value={item.value}
                     onChange={handleChanges}
                   />
                   {item.title}

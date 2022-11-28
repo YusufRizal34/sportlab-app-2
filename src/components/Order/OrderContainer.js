@@ -1,6 +1,7 @@
 import React from "react";
 import Spinner from "../Spinner";
 import { MoneyFormater } from "../../utils/MoneyFormater";
+import { TimeFormatter } from "../../utils/TimeFormatter";
 
 export default function OrderContainer({ data = [], loading }) {
   return (
@@ -18,9 +19,11 @@ export default function OrderContainer({ data = [], loading }) {
                   <div className="card">
                     <div className="card-header">
                       <div className="row">
-                        <div className="col">Arrive</div>
+                        <div className="col">
+                          {TimeFormatter(order.createdAt)}
+                        </div>
                         <div className="col text-end fw-bold">
-                          Lunas
+                          Produk telah disortir{" "}
                           <i className="bi bi-check-lg"></i>
                         </div>
                       </div>

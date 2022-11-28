@@ -14,7 +14,7 @@ export default function ShopContainer({
     <section>
       <div className="container">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 py-2">
             <Search setQuery={setQuery} />
             <ShopFilter setFilter={setFilter} filterData={filterData} />
           </div>
