@@ -157,6 +157,12 @@ ul {
   margin-bottom: 0;
 }
 
+.error-message {
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: red;
+}
+
 // HEADER
 header {
   width: 100%;
@@ -289,6 +295,44 @@ header {
   background-color: red;
 }
 
+//MODAL
+.modal-background {
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.715);
+  z-index: 9999;
+  justify-content: center;
+  .modal-container {
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    background-color: white;
+    transform: translateY(100%);
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .modal-header {
+    margin-bottom: 10px;
+    justify-content: end;
+  }
+  .modal-body {
+    margin-bottom: 10px;
+  }
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+  }
+  .close-button {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    font-size: 25px;
+  }
+}
+
 //SEARCH
 .search-input {
   padding: 5px;
@@ -361,6 +405,14 @@ footer {
   .img-container {
     height: 100px;
   }
+}
+
+.active-danger {
+  border: 1px solid red;
+}
+
+.active-success {
+  border: 1px solid rgb(7, 229, 7);
 }
 
 .payment-container {

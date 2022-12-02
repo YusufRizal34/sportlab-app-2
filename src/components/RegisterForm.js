@@ -91,7 +91,7 @@ export default function RegisterForm({ setRegisterAccount, errMessage }) {
               </label>
             </div>
             <div className="mb-3">
-              <p className="text-danger">{errMessage}</p>
+              <p className="error-message">{errMessage}</p>
             </div>
             <button type="submit" className="btn btn-primary w-100">
               Register

@@ -8,10 +8,13 @@ import { buyProduct, deleteProduct } from "../services/action/product";
 import Header from "../templates/Header";
 import Footer from "../templates/Footer";
 import CartContainer from "../components/Cart/CartContainer";
+import Modal from "../components/Modal";
 
 export default function CartPage() {
   const [page, setPage] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [errMessage, setErrMessage] = useState("");
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,7 +28,10 @@ export default function CartPage() {
   }, [dispatch, navigate]);
 
   const buyItem = async (data) => {
-    await dispatch(buyProduct({ page: `order-page`, productData: data }));
+    const { payload } = await dispatch(
+      buyProduct({ page: `order-page`, productData: data })
+    );
+    if (payload.message) setErrMessage(payload.message);
     loadPageData();
   };
 
@@ -34,18 +40,34 @@ export default function CartPage() {
     loadPageData();
   };
 
+  const handleSubmit = (pin) => {
+    const receiptData = {
+      products: page?.products,
+      totalPayment: page?.total,
+      pinNumber: parseInt(pin),
+    };
+    buyItem(receiptData).then(() => setOpen(false));
+  };
+
   useEffect(() => {
     loadPageData();
   }, [loadPageData]);
 
   return (
     <>
+      <Modal
+        open={open}
+        setClose={() => setOpen(false)}
+        onSubmit={handleSubmit}
+      />
       <Header data={page} />
       <CartContainer
         data={page}
         loading={loading}
         deleteItem={deleteItem}
         buyItem={buyItem}
+        setOpen={() => setOpen(true)}
+        errMessage={errMessage}
       />
       <Footer data={page?.user} />
     </>

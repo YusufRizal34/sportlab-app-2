@@ -11,13 +11,19 @@ export default function Filter({
 }) {
   const [show, setShow] = useState(false);
 
-  const handleChanges = (e) => {
+  const handleCheckBoxChanges = (e) => {
     const { checked, value, name } = e.target;
     if (checked) {
       onChange((prevData) => [...prevData, { value, name }]);
     } else {
       onChange((prevData) => prevData.filter((e) => e.value !== value));
     }
+  };
+
+  const handleSelectChanges = (e) => {
+    const { value } = e.target;
+    console.log(value);
+    if (value) onChange(value);
   };
 
   const handleToggle = () => {
@@ -33,8 +39,8 @@ export default function Filter({
               name={name}
               className="form-select"
               aria-label="Default select example"
+              onChange={handleSelectChanges}
             >
-              <option>Open this select menu</option>
               {data.map((item, index) => (
                 <option key={index} value={item.value}>
                   {item.title}
@@ -63,7 +69,7 @@ export default function Filter({
                     name={item.name}
                     id="item"
                     value={item.value}
-                    onChange={handleChanges}
+                    onChange={handleCheckBoxChanges}
                   />
                   {item.title}
                 </li>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { MoneyFormater } from "../../utils/MoneyFormater";
 import { CreditCardFormatter } from "../../utils/CreditCardFormatter";
@@ -8,9 +8,9 @@ export default function CartContainer({
   data = [],
   loading,
   deleteItem,
-  buyItem,
+  setOpen,
+  errMessage,
 }) {
-  const [paymentMethod, setPaymentMethod] = useState(null);
   const products = data?.products || [];
   const bank = data?.bank || null;
   const subTotal = products.reduce(function (prev, current) {
@@ -18,20 +18,6 @@ export default function CartContainer({
   }, 0);
   const shipping = 20000;
   const total = subTotal + shipping;
-
-  const handlePaymentMethod = (e) => {
-    setPaymentMethod(e.target.value);
-  };
-
-  const handleSumbit = (e) => {
-    e.preventDefault();
-    const productData = {
-      products: products,
-      totalPayment: total,
-      paymentMethod: paymentMethod,
-    };
-    buyItem(productData);
-  };
 
   return (
     <section>
@@ -84,7 +70,7 @@ export default function CartContainer({
           {!loading && products.length > 0 && (
             <div className="col-lg-4 col-12 payment-container">
               <div className="payment-margin">
-                <h4>Info Pembayaran</h4>
+                <h4>Informasi Pembayaran</h4>
               </div>
               <div className="payment-margin">
                 <label>Total Pembayaran</label>
@@ -103,7 +89,7 @@ export default function CartContainer({
               </div>
 
               <div className="payment-margin credit-card">
-                <label>Credit Account</label>
+                <label>Akun Kredit</label>
 
                 {bank.accountNumber ? (
                   <div className="row align-self-center">
@@ -118,7 +104,8 @@ export default function CartContainer({
                   </p>
                 )}
               </div>
-              <button onClick={handleSumbit} className="btn payment-button">
+              <div className="error-message">{errMessage}</div>
+              <button onClick={setOpen} className="btn payment-button">
                 Check Out
               </button>
             </div>

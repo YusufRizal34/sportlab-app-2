@@ -47,7 +47,7 @@ export default function PageDetailDescription({
               <i className="bi bi-heart-fill" />
             </button>
           </div>
-          <div className="mt-2">{errMessage}</div>
+          <div className="error-message">{errMessage}</div>
         </div>
       )}
     </div>

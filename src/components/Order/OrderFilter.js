@@ -1,15 +1,15 @@
 import React from "react";
 import Filter from "../Filter";
 
-export default function OrderFilter() {
-  const data = [
-    { value: "adidas", title: "Adidas" },
-    { value: "adidas", title: "Adidas" },
-    { value: "adidas", title: "Adidas" },
-  ];
+export default function OrderFilter({ filterData, setFilter }) {
   return (
     <div className="container">
-      <Filter isSelect name={"category"} data={data} />
+      <Filter
+        isSelect
+        name={"category"}
+        data={filterData}
+        onChange={setFilter}
+      />
     </div>
   );
 }

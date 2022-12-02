@@ -30,10 +30,11 @@ export default function ShopPage() {
     });
   };
 
-  const checkBoxFilteredProducts = (products, filters, property) => {
-    return products.filter(
-      (product) => product[property].indexOf(filters) != -1
+  const checkBoxFilteredProducts = (products, filters, attribute) => {
+    const filtered = products.filter((product) =>
+      filters.includes(product[attribute])
     );
+    return filtered;
   };
 
   const processingFilter = useMemo(() => {
@@ -45,23 +46,29 @@ export default function ShopPage() {
     if (filter.length > 0) {
       //CATEGORY FILTER
       const categoryFilter = filter
-        .filter((item) => item.name == "category")
+        .filter((item) => item.name === "category")
         .map((item) => item.value);
-      newData = checkBoxFilteredProducts(newData, categoryFilter, "categoryId");
+      if (categoryFilter.length > 0)
+        newData = checkBoxFilteredProducts(
+          newData,
+          categoryFilter,
+          "categoryId"
+        );
 
       //BRAND FILTER
       const brandFilter = filter
-        .filter((item) => item.name == "brand")
+        .filter((item) => item.name === "brand")
         .map((item) => item.value);
-      newData = checkBoxFilteredProducts(newData, brandFilter, "brand");
+      if (brandFilter.length > 0)
+        newData = checkBoxFilteredProducts(newData, brandFilter, "brand");
     }
 
     return newData;
-  }, [query, filter, page]);
+  }, [query, filter, page, searchFilteredProducts, checkBoxFilteredProducts]);
 
   useEffect(() => {
     loadPageData();
-  }, []);
+  }, [loadPageData]);
 
   const filterData = {
     category: [
@@ -88,13 +95,13 @@ export default function ShopPage() {
     ],
     brand: [
       {
-        value: "Adidas",
+        value: "adidas",
         title: "Adidas",
         name: "brand",
       },
       {
-        value: "Eager",
-        title: "Eager",
+        value: "puma",
+        title: "Puma",
         name: "brand",
       },
     ],
